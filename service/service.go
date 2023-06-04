@@ -15,11 +15,8 @@ type FunctionService struct {
 }
 
 func NewFunctionService(cfgs ...FunctionConfiguration) (*FunctionService, error) {
-	// Create the orderservice
 	s := &FunctionService{}
-	// Apply all Configurations passed in
 	for _, cfg := range cfgs {
-		// Pass the service into the configuration function
 		err := cfg(s)
 		if err != nil {
 			return nil, err
