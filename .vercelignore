@@ -1,0 +1,9 @@
+# Ignore everything (folders and files) on root only
+/*
+!api
+!pkg
+!service
+!vercel.json
+!*.go
+!go.mod
+!go.sum
