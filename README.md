@@ -4,6 +4,14 @@
 
 TBD.
 
+## Prerequisites
+
+Export `GITHUB_TOKEN` as environment variable
+
+```bash
+export GITHUB_TOKEN=<token>
+```
+
 ## How to use
 
 ```bash
