@@ -3,6 +3,7 @@ module daeuniverse/functions
 go 1.20
 
 require (
+	github.com/go-chi/chi/v5 v5.0.8
 	github.com/go-resty/resty/v2 v2.7.0
 	github.com/google/go-github/v52 v52.0.0
 	golang.org/x/oauth2 v0.8.0

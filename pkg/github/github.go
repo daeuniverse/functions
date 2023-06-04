@@ -2,15 +2,16 @@ package github
 
 import (
 	"context"
+	"fmt"
+	"os"
+
 	"github.com/google/go-github/v52/github"
 	"golang.org/x/oauth2"
-	"os"
 )
 
 type Repo interface {
 	GetLatestRelease() (*github.RepositoryRelease, error)
-	GetOranizationInput() string
-	GetRepositoryInput() string
+	FormURL(releaseDate string, filetype string) string
 }
 
 type session struct {
@@ -18,6 +19,10 @@ type session struct {
 	Client       *github.Client
 	Organization string
 	Repository   string
+}
+
+func (s *session) FormURL(releaseDate string, filetype string) string {
+	return fmt.Sprintf("https://github.com/%s/%s/releases/download/%s/%s", s.Organization, s.Repository, releaseDate, filetype)
 }
 
 func NewSession(organization string, repo string) Repo {
@@ -32,12 +37,4 @@ func NewSession(organization string, repo string) Repo {
 		Organization: organization,
 		Repository:   repo,
 	}
-}
-
-func (s *session) GetOranizationInput() string {
-	return s.Organization
-}
-
-func (s *session) GetRepositoryInput() string {
-	return s.Repository
 }

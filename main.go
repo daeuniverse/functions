@@ -3,22 +3,14 @@ package main
 import (
 	"log"
 
-	"daeuniverse/functions/service"
+	"daeuniverse/functions/pkg/web/server"
 )
 
 func main() {
-	svc, err := service.NewFunctionService(
-		service.WithGithub("techprober", "v2ray-rules-dat"),
-		service.WithWebClient(),
-	)
+	log.Printf("Server listening on port: %d", 3000)
+	router := server.NewRouter()
+	err := router.Serve(3000)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	result, err := svc.FetchGeoData("geosite.dat")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	println(result.StatusCode())
 }

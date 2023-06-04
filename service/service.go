@@ -1,10 +1,8 @@
 package service
 
 import (
-	"fmt"
-
 	"daeuniverse/functions/pkg/github"
-	"daeuniverse/functions/pkg/web"
+	web "daeuniverse/functions/pkg/web/client"
 )
 
 type FunctionConfiguration func(fs *FunctionService) error
@@ -41,13 +39,12 @@ func WithWebClient() FunctionConfiguration {
 
 func (s *FunctionService) FetchGeoData(filetype string) (*web.Response, error) {
 	release, err := s.repo.GetLatestRelease()
-
 	releaseDate := release.GetName()
 	if err != nil {
 		return nil, err
 	}
 
-	url := fmt.Sprintf("https://github.com/%s/%s/releases/download/%s/%s", s.repo.GetOranizationInput(), s.repo.GetRepositoryInput(), releaseDate, filetype)
+	url := s.repo.FormURL(releaseDate, filetype)
 
 	res, err := s.web.Get(url)
 	if err != nil {

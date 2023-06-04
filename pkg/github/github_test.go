@@ -1,10 +1,9 @@
 package github
 
 import (
-	"fmt"
 	"testing"
 
-	"daeuniverse/functions/pkg/web"
+	web "daeuniverse/functions/pkg/web/client"
 )
 
 func TestGithub_Auth(t *testing.T) {
@@ -15,7 +14,7 @@ func TestGithub_Auth(t *testing.T) {
 	}
 
 	releaseDate := result.GetName()
-	url := fmt.Sprintf("https://github.com/techprober/v2ray-rules-dat/releases/download/%s/geosite.dat", releaseDate)
+	url := repo.FormURL(releaseDate, "geosite.data")
 
 	w := web.NewClient()
 	res, err := w.GetAndSave(url, "geosite.dat")

@@ -1,4 +1,4 @@
-package web
+package client
 
 import (
 	"github.com/go-resty/resty/v2"

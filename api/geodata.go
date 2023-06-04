@@ -1,10 +1,39 @@
-package handler
+package api
 
 import (
+	"bytes"
 	"fmt"
+	"io"
 	"net/http"
+
+	"daeuniverse/functions/service"
 )
 
-func Handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "<h1>Hello from Go!</h1>")
+func GeodataHandler(w http.ResponseWriter, r *http.Request) {
+	file := r.URL.Query().Get("file")
+
+	svc, err := service.NewFunctionService(
+		service.WithGithub("techprober", "v2ray-rules-dat"),
+		service.WithWebClient(),
+	)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+
+	res, err := svc.FetchGeoData(file)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	defer res.RawBody().Close()
+
+	w.Header().Set("Content-Type", res.Header().Get("Content-Type"))
+	w.Header().Set("Content-Length", res.Header().Get("Content-Length"))
+	w.Header().Set("Content-Disposition", fmt.Sprintf("attachment; filename=%s", file))
+	w.WriteHeader(res.StatusCode())
+
+	buffer := make([]byte, 8)
+	_, err = io.CopyBuffer(w, bytes.NewReader(res.Body()), buffer)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
