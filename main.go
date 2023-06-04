@@ -1,11 +1,6 @@
 package main
 
-import (
-	"daeuniverse/functions/pkg/github"
-	"daeuniverse/functions/pkg/util"
-)
+import ()
 
 func main() {
-	result := github.Auth()
-	util.PrettyPrint(result)
 }
