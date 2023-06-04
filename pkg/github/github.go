@@ -9,6 +9,8 @@ import (
 
 type Repo interface {
 	GetLatestRelease() (*github.RepositoryRelease, error)
+	GetOranizationInput() string
+	GetRepositoryInput() string
 }
 
 type session struct {
@@ -30,4 +32,12 @@ func NewSession(organization string, repo string) Repo {
 		Organization: organization,
 		Repository:   repo,
 	}
+}
+
+func (s *session) GetOranizationInput() string {
+	return s.Organization
+}
+
+func (s *session) GetRepositoryInput() string {
+	return s.Repository
 }
