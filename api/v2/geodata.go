@@ -14,11 +14,13 @@ func GeodataHandler(w http.ResponseWriter, r *http.Request) {
 	)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	redirectPath, err := svc.GetLatestGeodataReleaseURL(file)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	// return 302(redirect)
