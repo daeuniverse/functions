@@ -18,11 +18,13 @@ func GeodataHandler(w http.ResponseWriter, r *http.Request) {
 	)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	res, err := svc.FetchGeoData(file)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	defer res.RawBody().Close()
 
@@ -35,5 +37,6 @@ func GeodataHandler(w http.ResponseWriter, r *http.Request) {
 	_, err = io.CopyBuffer(w, bytes.NewReader(res.Body()), buffer)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
