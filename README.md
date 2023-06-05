@@ -20,9 +20,9 @@ go run main.go
 
 ## API Comsumption
 
-- healthcheck - `/GET localhost:3000/api/health`
-- fetch geodata(geosite.dat) - `/GET localhost:3000/api/geodata?file=geosite.dat`
-- fetch geodata(geoip.dat) - `/GET localhost:3000/api/geodata?file=geoip.dat`
+- healthcheck - `/GET localhost:3000/api/v2/health`
+- fetch geodata(geosite.dat) - `/GET localhost:3000/api/v2/geodata?file=geosite.dat`
+- fetch geodata(geoip.dat) - `/GET localhost:3000/api/v2/geodata?file=geoip.dat`
 
 ## References
 
