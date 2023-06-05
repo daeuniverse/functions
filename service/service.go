@@ -53,3 +53,15 @@ func (s *FunctionService) FetchGeoData(filetype string) (*web.Response, error) {
 
 	return res, nil
 }
+
+func (s *FunctionService) GetLatestGeodataReleaseURL(filetype string) (string, error) {
+	release, err := s.repo.GetLatestRelease()
+	releaseDate := release.GetName()
+	if err != nil {
+		return "", err
+	}
+
+	url := s.repo.FormURL(releaseDate, filetype)
+
+	return url, nil
+}

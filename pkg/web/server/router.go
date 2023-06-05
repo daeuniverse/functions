@@ -7,7 +7,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
-	"daeuniverse/functions/api"
+	api "daeuniverse/functions/api/v2"
 )
 
 type Router struct {
