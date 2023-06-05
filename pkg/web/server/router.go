@@ -45,8 +45,9 @@ func NewRouter() *Router {
 	router := &Router{Mux: chi.NewRouter()}
 	router.RegisterMiddlewares()
 	router.RegisterRoutes(Routes{
-		Route{"GET", "/api/geodata", api.GeodataHandler},
-		Route{"GET", "/api/health", api.HealthcheckHandler},
+		Route{"GET", "/api/v2/geodata", api.GeodataHandler},
+		Route{"GET", "/api/v2/health", api.HealthcheckHandler},
+		Route{"GET", "/api/v2/index", api.IndexHandler},
 	})
 	return router
 }
