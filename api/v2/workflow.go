@@ -1,10 +1,17 @@
 package v2
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"daeuniverse/functions/service"
 )
+
+type response struct {
+	Result       string `json:"result"`
+	WorkflowURL  string `json:"workflow_url"`
+	WorkflowFile string `json:"workflow_file"`
+}
 
 func WorkflowHandler(w http.ResponseWriter, r *http.Request) {
 	workflow := r.URL.Query().Get("name")
@@ -30,7 +37,8 @@ func WorkflowHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte(`{"result": "ok!"}`))
+		res := &response{Result: "ok!", WorkflowURL: "https://github.com/daeuniverse/daed/actions/workflows/pick-build.yml", WorkflowFile: "https://github.com/daeuniverse/daed/blob/main/.github/workflows/pick-build.yml"}
+		_ = json.NewEncoder(w).Encode(res)
 	} else {
 		w.WriteHeader(http.StatusNotAcceptable)
 		_, _ = w.Write([]byte(`{"error": "the given workflow cannot be trigger as it is not an available option."}`))
