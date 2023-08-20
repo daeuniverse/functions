@@ -3,6 +3,8 @@ package v2
 import (
 	"encoding/json"
 	"net/http"
+	"os"
+	"strings"
 
 	"daeuniverse/functions/service"
 )
@@ -16,7 +18,27 @@ type response struct {
 func WorkflowHandler(w http.ResponseWriter, r *http.Request) {
 	workflow := r.URL.Query().Get("name")
 	w.Header().Set("Content-Type", "application/json")
+	// Get the Authorization header from the request
+	auth := r.Header.Get("Authorization")
 
+	// Check if the Authorization header is present
+	if auth == "" {
+		http.Error(w, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+	// Check if the token is the valid and authorized
+	authHeaderParts := strings.Split(auth, " ")
+	if len(authHeaderParts) != 2 || authHeaderParts[0] != "Bearer" {
+		http.Error(w, "Invalid token", http.StatusUnauthorized)
+		return
+	}
+	token := authHeaderParts[1]
+	if token != os.Getenv("AUTH_TOKEN") {
+		http.Error(w, "Unauthorized.", http.StatusUnauthorized)
+		return
+	}
+
+	// Handler workflow trigger
 	if workflow == "daed-pick-build" {
 		svc, err := service.NewFunctionService(
 			service.WithGithub("daeuniverse", "daed"),
