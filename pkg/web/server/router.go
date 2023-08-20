@@ -48,6 +48,7 @@ func NewRouter() *Router {
 		Route{"GET", "/api/v2/geodata", api.GeodataHandler},
 		Route{"GET", "/api/v2/health", api.HealthcheckHandler},
 		Route{"GET", "/api/v2/index", api.IndexHandler},
+		Route{"POST", "/api/v2/workflow", api.WorkflowHandler},
 	})
 	return router
 }

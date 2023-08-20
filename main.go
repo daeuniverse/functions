@@ -7,9 +7,9 @@ import (
 )
 
 func main() {
-	log.Printf("Server listening on port: %d", 3000)
+	log.Printf("Server listening on port: %d", 5888)
 	router := server.NewRouter()
-	err := router.Serve(3000)
+	err := router.Serve(5888)
 	if err != nil {
 		log.Fatal(err)
 	}

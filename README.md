@@ -2,7 +2,7 @@
 
 ## Intro
 
-TBD.
+A serverless functions for internal interaction with [@daeuniverse](https://github.com/daeuniverse).
 
 ## Prerequisites
 
@@ -20,9 +20,10 @@ go run main.go
 
 ## API Comsumption
 
-- healthcheck - `/GET localhost:3000/api/v2/health`
-- fetch geodata(geosite.dat) - `/GET localhost:3000/api/v2/geodata?file=geosite.dat`
-- fetch geodata(geoip.dat) - `/GET localhost:3000/api/v2/geodata?file=geoip.dat`
+- healthcheck - `/GET localhost:5888/api/v2/health`
+- fetch geodata(geosite.dat) - `/GET localhost:5888/api/v2/geodata?file=geosite.dat`
+- fetch geodata(geoip.dat) - `/GET localhost:5888/api/v2/geodata?file=geoip.dat`
+- trigger daed-pick-build - `/POST localhost:5888/api/v2/workflow?name=daed-pick-build&daed=main&wing=origin/main&dae=origin/main`
 
 ## References
 
