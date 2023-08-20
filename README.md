@@ -2,7 +2,7 @@
 
 ## Intro
 
-A serverless functions for internal interaction with [@daeuniverse](https://github.com/daeuniverse).
+A serverless functions for internal interaction with [@daeuniverse](https://github.com/daeuniverse)
 
 ## Prerequisites
 
@@ -10,6 +10,8 @@ Export `GITHUB_TOKEN` as environment variable
 
 ```bash
 export GITHUB_TOKEN=<token>
+# ONLY needed for workflow routes
+# export AUTH_TOKEN=<token>
 ```
 
 ## How to use
