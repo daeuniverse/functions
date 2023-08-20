@@ -2,7 +2,7 @@
 
 ## Intro
 
-A serverless functions for internal interaction with [@daeuniverse](https://github.com/daeuniverse).
+A serverless functions for internal interaction with [@daeuniverse](https://github.com/daeuniverse)
 
 ## Prerequisites
 
