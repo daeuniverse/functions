@@ -10,6 +10,8 @@ Export `GITHUB_TOKEN` as environment variable
 
 ```bash
 export GITHUB_TOKEN=<token>
+# ONLY needed for workflow routes
+# export AUTH_TOKEN=<token>
 ```
 
 ## How to use
